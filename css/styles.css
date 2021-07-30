@@ -1,3 +1,40 @@
+body {
+    background-color: #EEF9BF;
+}
+
+h1 {
+    font-size: 56px;
+    color: #75B79E;
+    font-weight: bold;
+    text-align: center;
+    padding: 40px 0;
+}
+
 main {
-    background-color: aquamarine;
-}  
+    margin: 0 100px;   
+}
+
+img {
+    width: 90%;
+}
+
+.flex-cc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    height: 200px;
+    width: 200px;
+    height: 254px;
+    margin: 10px 20px;
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+}
