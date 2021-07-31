@@ -22,6 +22,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .flex {
@@ -30,11 +31,33 @@ img {
 }
 
 .card {
-    height: 200px;
     width: 200px;
-    height: 254px;
-    margin: 10px 20px;
+    height: 250px;
+    position: relative;
+    cursor: pointer;
+    margin: 15px 25px;
+  }
+
+.face {
+    width: 100%;
+    height: 100%;
     background-color: #A7E9AF;
     border: 1px solid #99CEA8;
     border-radius: 5px;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all 1s;
+    transform-style: preserve-3d;
+}
+
+.back-face {
+    transform: rotateY(180deg);
+}
+
+.fechar {
+    transform: rotateY(0deg);
+}
+
+.abrir {
+    transform: rotateY(-180deg);
 }
