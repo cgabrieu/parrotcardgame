@@ -1,12 +1,17 @@
-let ultimoCardVirado, cartas = [], jogadas = 0, acertos = 0;
+let ultimoCardVirado, cartas = [], jogadas = 0, acertos = 0, segundos = 0;
 
 function animacao(card) {
     card.firstElementChild.classList.toggle("vira-um");
     card.lastElementChild.classList.toggle("vira-dois");
 }
 
-function alet() {
+function aleat() {
     return Math.random() - 0.5;
+}
+
+function tique() {
+    segundos += 0.005;
+    document.querySelector("time span").innerHTML = segundos.toFixed(2);
 }
 
 function checarNumero() {
@@ -18,10 +23,10 @@ function checarNumero() {
 }
 
 function embaralharCartas(quantidadeCartas) {
-    let possivelEmb = ["bobross","explody","fiesta","metal","revertit","triplets", "unicorn"].sort(alet);
+    let possivelEmb = ["bobross","explody","fiesta","metal","revertit","triplets", "unicorn"].sort(aleat);
 
     for (let i = 0; i < (quantidadeCartas/2); i++) cartas.push(possivelEmb[i], possivelEmb[i]);
-    desenharCartas(cartas.sort(alet));
+    desenharCartas(cartas.sort(aleat));
 }
 
 function desenharCartas(cartas) {
@@ -50,14 +55,18 @@ function virarCard(card) {
         ultimoCardVirado = null;
         jogadas++;
         acertos++;
-        checarFinal();
+        checarFinal(time);
+    }
+
+    if (jogadas === 0) {
+        time = setInterval(tique, 5);
     }
 }
 
-
-function checarFinal() {
+function checarFinal(time) {
     if (acertos == cartas.length/2) {
-        setTimeout(confirm, 200,`Você venceu em ${jogadas} Jogadas!`);
+        setTimeout(confirm, 200,`Você venceu em ${segundos.toFixed(2)}s e ${jogadas} jogadas!`);
+        clearInterval(time);
         //window.location.reload();
     }
 }
