@@ -35,7 +35,7 @@ img {
     height: 250px;
     position: relative;
     cursor: pointer;
-    margin: 15px 25px;
+    margin: 25px 25px;
   }
 
 .face {
@@ -54,10 +54,10 @@ img {
     transform: rotateY(180deg);
 }
 
-.fechar {
-    transform: rotateY(0deg);
+.vira-um {
+    transform: rotateY(-180deg);
 }
 
-.abrir {
-    transform: rotateY(-180deg);
+.vira-dois {
+    transform: rotateY(0deg);
 }
