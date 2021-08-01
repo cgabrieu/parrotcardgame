@@ -58,6 +58,6 @@ function virarCard(card) {
 function checarFinal() {
     if (acertos == cartas.length/2) {
         setTimeout(confirm, 200,`Você venceu em ${jogadas} Jogadas!`);
-        window.location.reload();
+        //window.location.reload();
     }
 }
