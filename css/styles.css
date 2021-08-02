@@ -56,7 +56,7 @@ dialog {
     text-align: center;
 }
 
-select, button {
+select, button, input {
     font-size: 30px;
     margin: 25px 30px;
 }
@@ -135,7 +135,7 @@ menu {
       right: 0;
   }
 
-  select, button {
+  select, button, input {
     font-size: 15px;
   }
 }

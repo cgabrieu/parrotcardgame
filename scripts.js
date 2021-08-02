@@ -1,4 +1,7 @@
-let ultimoCardVirado, cartas = [], jogadas = 0, segundos = 0;
+let cartas = [], ultimoCardVirado;
+let nome, quantidadeCartas, jogadas = 0, segundos = 0;
+
+let ranking = JSON.parse(localStorage.getItem("ranking") || "[]"); 
 
 function animacao(card) {
     card.firstElementChild.classList.toggle("vira-um");
@@ -15,15 +18,16 @@ function tique() {
 }
 
 function checarNumero() {
+    nome = document.querySelector("menu input").value;
     const selecionado = document.querySelector("select");
-    let qc = selecionado.options[selecionado.selectedIndex].value;
+    quantidadeCartas = Number(selecionado.options[selecionado.selectedIndex].value);
 
     if (selecionado.selectedIndex !== 0) inicial.close();
 
-    embaralharCartas(Number(qc));
+    embaralharCartas();
 }
 
-function embaralharCartas(quantidadeCartas) {
+function embaralharCartas() {
     let possivelEmb = ["bobross","explody","fiesta","metal","revertit","triplets", "unicorn"].sort(aleat);
 
     for (let i = 0; i < (quantidadeCartas/2); i++) cartas.push(possivelEmb[i], possivelEmb[i]);
@@ -40,7 +44,7 @@ function desenharCartas(cartas) {
 }
 
 function virarCard(card) {
-    
+
     if (ultimoCardVirado == card || cartas.indexOf(card.id) < 0) return;
 
     if (ultimoCardVirado == undefined) {
@@ -69,6 +73,14 @@ function checarFinal(time) {
     if (cartas.length === 0) {
         clearInterval(time);
         setTimeout(final.show(), 200);
-        document.querySelector(".resultado").innerHTML = `Você venceu em ${jogadas} jogadas e um tempo de ${segundos.toFixed(2)}s!`;
+        document.querySelector(".resultado").innerHTML = `${jogadas} jogadas | ${segundos.toFixed(2)}s`;
+
+        ranking.push({
+            nome: nome,
+            quantidadeCartas: quantidadeCartas,
+            jogadas: jogadas,
+            tempo: Number(segundos.toFixed(2)),
+        });
+        localStorage.setItem("ranking", JSON.stringify(ranking));
     }
 }
