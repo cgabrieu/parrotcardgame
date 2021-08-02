@@ -12,13 +12,38 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body onload="checarNumero()">
-    
+<body>
     <header>
         <h1>PARROT CARD GAME</h1>
         <time><p>Tempo: </p> <span>0</span>s</time>
     </header>
     <main class="flex-cc"></main>
+
+    <dialog id="inicial" open>
+        <p>Vamos jogar!</p>
+        <hr>
+        <menu>
+            <select>
+                <option>Selecione a quantidade de cartas</option>
+                <option value="4">4 cartas</option>
+                <option value="6">6 cartas</option>
+                <option value="8">8 cartas</option>
+                <option value="10">10 cartas</option>
+                <option value="12">12 cartas</option>
+                <option value="14">14 cartas</option>
+            </select>
+            <button onclick="checarNumero()">Iniciar</button>
+        </menu>     
+    </dialog>
+
+    <dialog id="final">
+        <p>Final!</p>
+        <hr>
+        <div class="resultado"></div>
+        <button onclick="window.location.reload();">Reiniciar</button>
+    </dialog>
+
+
     <script src="scripts.js"></script>
 </body>
 </html>

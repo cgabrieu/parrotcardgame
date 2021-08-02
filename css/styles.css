@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #EEF9BF;
 }
@@ -34,6 +38,34 @@ time {
     padding: 20px;
 }
 
+dialog {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+
+    margin-top: 25px;
+    width: 50%;
+    min-width: 350px;
+    border: 3px solid #178f61;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 3px #178f61;
+    text-align: center;
+}
+
+select, button {
+    font-size: 30px;
+    margin: 25px 30px;
+}
+
+menu {
+    display: flex;
+    flex-direction: column;
+}
+
 .flex-cc {
     display: flex;
     justify-content: center;
@@ -52,7 +84,7 @@ time {
     position: relative;
     cursor: pointer;
     margin: 25px 25px;
-  }
+}
 
 .face {
     width: 100%;
@@ -78,6 +110,16 @@ time {
     transform: rotateY(0deg);
 }
 
+.resultado {
+    font-size: 26px;
+    margin-top: 40px;
+    text-shadow: none;
+}
+
+#final button {
+    margin-top: 40px;
+}
+
 @media (max-width: 700px)
 {
   header {
@@ -91,5 +133,9 @@ time {
       position: relative;
       top: 0;
       right: 0;
+  }
+
+  select, button {
+    font-size: 15px;
   }
 }

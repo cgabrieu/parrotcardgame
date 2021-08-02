@@ -1,4 +1,4 @@
-let ultimoCardVirado, cartas = [], jogadas = 0, acertos = 0, segundos = 0;
+let ultimoCardVirado, cartas = [], jogadas = 0, segundos = 0;
 
 function animacao(card) {
     card.firstElementChild.classList.toggle("vira-um");
@@ -15,10 +15,11 @@ function tique() {
 }
 
 function checarNumero() {
-    let qc;
-    do {
-        qc = prompt("Escolha a quantidade de cartas (número par entre 4 e 14): ");
-    } while (qc < 4 || qc > 14 || qc % 2 !== 0);
+    const selecionado = document.querySelector("select");
+    let qc = selecionado.options[selecionado.selectedIndex].value;
+
+    if (selecionado.selectedIndex !== 0) inicial.close();
+
     embaralharCartas(Number(qc));
 }
 
@@ -39,7 +40,8 @@ function desenharCartas(cartas) {
 }
 
 function virarCard(card) {
-    if (ultimoCardVirado == card) return;
+    
+    if (ultimoCardVirado == card || cartas.indexOf(card.id) < 0) return;
 
     if (ultimoCardVirado == undefined) {
         ultimoCardVirado = card;
@@ -54,7 +56,7 @@ function virarCard(card) {
         animacao(card);
         ultimoCardVirado = null;
         jogadas++;
-        acertos++;
+        cartas = cartas.filter(e => e !== card.id);
         checarFinal(time);
     }
 
@@ -64,9 +66,9 @@ function virarCard(card) {
 }
 
 function checarFinal(time) {
-    if (acertos == cartas.length/2) {
-        setTimeout(confirm, 200,`Você venceu em ${segundos.toFixed(2)}s e ${jogadas} jogadas!`);
+    if (cartas.length === 0) {
         clearInterval(time);
-        //window.location.reload();
+        setTimeout(final.show(), 200);
+        document.querySelector(".resultado").innerHTML = `Você venceu em ${jogadas} jogadas e um tempo de ${segundos.toFixed(2)}s!`;
     }
 }
