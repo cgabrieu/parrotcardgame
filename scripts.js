@@ -1,6 +1,5 @@
 let cartas = [], ultimoCardVirado;
 let nome, quantidadeCartas, jogadas = 0, segundos = 0;
-
 let ranking = JSON.parse(localStorage.getItem("ranking") || "[]"); 
 
 function animacao(card) {
@@ -73,14 +72,41 @@ function checarFinal(time) {
     if (cartas.length === 0) {
         clearInterval(time);
         setTimeout(final.show(), 200);
-        document.querySelector(".resultado").innerHTML = `${jogadas} jogadas | ${segundos.toFixed(2)}s`;
+        const tempo = segundos.toFixed(2);
+        document.querySelector(".resultado").innerHTML = `Você venceu, ${nome}! <br><br> ${jogadas} jogadas | ${tempo}s`;
 
         ranking.push({
             nome: nome,
             quantidadeCartas: quantidadeCartas,
             jogadas: jogadas,
-            tempo: Number(segundos.toFixed(2)),
+            tempo: tempo,
+            pontuacao: obterPontuacao(tempo),
         });
+
+        ranking = ranking.sort(comparador);
+
+        let pos = 0;
+        ranking.forEach(e => {
+            document.querySelector("table").innerHTML += 
+            `<tr><td>${++pos}°</td><td>${e.nome}</td><td>${e.quantidadeCartas}</td><td>${e.jogadas}</td><td>${e.tempo}s</td><td>${e.pontuacao}</td></tr>`
+            ;});
+
         localStorage.setItem("ranking", JSON.stringify(ranking));
     }
+}
+
+function obterPontuacao(tempo) {
+    let pontuacao = 0;
+    pontuacao += quantidadeCartas*70;
+    pontuacao -= jogadas*15;
+    pontuacao -= tempo*10;
+
+    if (pontuacao < 0) return 0;
+    return pontuacao.toFixed(2);
+}
+
+function comparador(e,f) {
+    if (e.pontuacao > f.pontuacao) return -1;
+    if (e.pontuacao < f.pontuacao) return 1;
+    return 0;
 }
